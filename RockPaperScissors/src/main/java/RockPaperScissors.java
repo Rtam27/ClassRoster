@@ -12,67 +12,41 @@ import java.util.Scanner;
 import java.lang.Math;
 
 public class RockPaperScissors {
-    public static int chooseRounds() {
-        try {
 
-            boolean roundConditions = true;
-            while (roundConditions == true) {
 
-                Scanner myScanner = new Scanner(System.in);
-                System.out
-                        .println("Please Choose How Many Rounds of Rock Paper Scissor You Would Like to Play (1-10): ");
-                String playerRounds = myScanner.nextLine();
-                int round = Integer.parseInt(playerRounds);
-                if (round > 0 && round < 11) {
-                    return round;
-                } else {
-                    System.out.println("Please choose a valid number!");
-                }
-            }
-        }
-
-        catch (Exception e) {
-            System.out.println("Invalid Input, Please Try Again");
-            chooseRounds();
-        }
-
-    }
-
-    public static String playerChoice() {
-        boolean choosing = true;
-
-        while (choosing == true) {
-            try {
-
-                System.out.println("Please choose one of the following:");
-                System.out.println("1: Rock");
-                System.out.println("2: Paper");
-                System.out.println("3: Scissor");
-
-                Scanner newScanner = new Scanner(System.in);
-                String playerRPS = newScanner.nextLine();
-                int playerRPSchoice = Integer.parseInt(playerRPS);
-
-                switch (playerRPSchoice) {
-                case 1:
-                    return "Rock";
-
-                case 2:
-                    return "Paper";
-                case 3:
-                    return "Scissor";
-                default:
-                    System.out.println("Invalid Input, Please Try Again");
-
-                }
-
-            } catch (Exception e) {
-                System.out.println("Invalid Input, Please Try Again");
-
-            }
-        }
-
-    }
+//    public static String playerChoice() {
+//        boolean choosing = true;
+//
+//        while (choosing == true) {
+//         
+//
+//                System.out.println("Please choose one of the following:");
+//                System.out.println("1: Rock");
+//                System.out.println("2: Paper");
+//                System.out.println("3: Scissor");
+//
+//                Scanner newScanner = new Scanner(System.in);
+//                String playerRPS = newScanner.nextLine();
+//                int playerRPSchoice = Integer.parseInt(playerRPS);
+//
+//                switch (playerRPSchoice) {
+//                case 1:
+//                    return "Rock";
+//
+//                case 2:
+//                    return "Paper";
+//                case 3:
+//                    return "Scissor";
+//                default:
+//                    System.out.println("Invalid Input, Please Try Again");
+//              
+//
+//                }
+//
+//            } 
+//        
+//    }
+    
 
     public static String computerChoice() {
         int max = 3;
@@ -89,6 +63,8 @@ public class RockPaperScissors {
         case 3:
             return "Scissor";
         }
+        
+        return "Paper";
     }
 
     public static void main(String[] args) {
@@ -101,14 +77,62 @@ public class RockPaperScissors {
             int loseCounter = 0;
             String playerPick = "";
             String computerPick = "";
-
-            rounds = chooseRounds();
+            
+            
+           Scanner myScanner = new Scanner(System.in);
+           boolean condition = true;
+           while(condition==true){
+                System.out.println("Please Choose How Many Rounds of Rock Paper Scissor You Would Like to Play (1-10): ");
+                String playerRounds = myScanner.nextLine();
+                int round = Integer.parseInt(playerRounds);
+                if (round > 0 && round < 11) {
+                    rounds = round;
+                    condition=false;
+                } else {
+                    System.out.println("Please choose a valid number!");
+         
+                }    
+           }
             System.out.println(rounds + " " + "rounds");
 
             while (currentRound <= rounds) {
                 System.out.println("Round" + " " + currentRound);
+                
+                
+                  boolean choosing = true;
 
-                playerPick = playerChoice();
+        while (choosing == true) {
+         
+
+                System.out.println("Please choose one of the following:");
+                System.out.println("1: Rock");
+                System.out.println("2: Paper");
+                System.out.println("3: Scissor");
+
+                Scanner newScanner = new Scanner(System.in);
+                String playerRPS = newScanner.nextLine();
+                int playerRPSchoice = Integer.parseInt(playerRPS);
+
+                switch (playerRPSchoice) {
+                case 1:
+                   playerPick = "Rock";
+                   choosing = false;
+                   break;
+                case 2:
+                    playerPick =  "Paper";
+                    choosing = false;
+                    break;
+                case 3:
+                    playerPick = "Scissor";
+                    choosing = false;
+                    break;
+                default:
+                    System.out.println("Invalid Input, Please Try Again");
+     
+                }
+
+            } 
+           
                 System.out.println("Player 1 Chooses" + " " + playerPick);
                 computerPick = computerChoice();
                 System.out.println("CPU Chooses" + " " + computerPick);
