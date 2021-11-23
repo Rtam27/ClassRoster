@@ -12,6 +12,7 @@ import com.sg.vendingmachine.dto.Item;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -252,6 +253,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         
         
         int[] changeAmount = returnChange(change);
+       
         return changeAmount;
         
     }

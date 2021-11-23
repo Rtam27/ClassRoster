@@ -27,4 +27,9 @@ public interface VendingMachineDao {
     BigDecimal getBalance() throws VendingMachineDaoException;
     
     void updateBalance(BigDecimal newBalance) throws VendingMachineDaoException;
+    
+    void setBalanceTest();
+    BigDecimal getBalanceTest();
+    
+    
 }

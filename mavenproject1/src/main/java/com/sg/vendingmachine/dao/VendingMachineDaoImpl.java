@@ -27,10 +27,14 @@ import java.util.logging.Logger;
  * @author raymondtam
  */
 public class VendingMachineDaoImpl implements VendingMachineDao {
+    interface StringFunction {
+        String run(String str);
+    }
     
     public Map<String, Item> itemMap = new HashMap<>();
     public final String ITEM_ROSTER_FILE;
     public static final String DELIMITER = "::";
+    StringFunction delimiter = (s) -> s + "::";
     public BigDecimal currentMoney= new BigDecimal(0.00);
 
     
@@ -81,10 +85,22 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         scanner.close();
 
     }
-
+    
+  public static String printFormatted(String str, StringFunction format) {
+    String result = format.run(str);
+    return result;
+  }
     private String marshallItem(Item addedItem) {
-        String ITEMTOBEADDED = addedItem.getItemId() + DELIMITER + addedItem.getItemName() + DELIMITER + addedItem.getItemCost() + DELIMITER + addedItem.getCurrentQuantity()+DELIMITER + addedItem.getMaxQuantity(); 
-
+        String itemId = addedItem.getItemId();
+        String itemName = addedItem.getItemName();
+        String itemCost = Double.toString(addedItem.getItemCost());
+        String currentQuantity = String.valueOf(addedItem.getCurrentQuantity());
+        String maxQuantity = String.valueOf(addedItem.getMaxQuantity());
+        
+        String ITEMTOBEADDED = printFormatted(itemId,delimiter) + printFormatted(itemName,delimiter) + printFormatted(itemCost,delimiter) + printFormatted(currentQuantity,delimiter)+printFormatted(maxQuantity,delimiter);
+        System.out.println("This works!");
+//        String ITEMTOBEADDED = addedItem.getItemId() + DELIMITER + addedItem.getItemName() + DELIMITER + addedItem.getItemCost() + DELIMITER + addedItem.getCurrentQuantity()+DELIMITER + addedItem.getMaxQuantity(); 
+            
         return ITEMTOBEADDED;
     }
 
@@ -159,6 +175,11 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         return currentMoney;
     }
     
+    @Override
+    public void setBalanceTest(){
+        currentMoney= new BigDecimal(10.00);
+    }
+    
    
     
   
@@ -168,6 +189,13 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
     public void updateBalance(BigDecimal newBalance) throws VendingMachineDaoException {
         currentMoney = newBalance;
     }
+
+    @Override
+    public BigDecimal getBalanceTest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
     
     
 }

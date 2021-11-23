@@ -17,13 +17,14 @@ import java.util.List;
  */
 public class VendingMachineDaoStubImpl implements VendingMachineDao{
     public Item onlyItem;
+    public BigDecimal currentMoney= new BigDecimal(00.00);
     
     public VendingMachineDaoStubImpl() {
-        onlyItem = new Item("0001");
+        onlyItem = new Item("0022");
         onlyItem.setItemName("Mars");
-        onlyItem.setItemCost(3.20);
+        onlyItem.setItemCost(6.00);
         onlyItem.setCurrentQuantity(3);
-         onlyItem.setMaxQuantity(30);
+        onlyItem.setMaxQuantity(30);
     }
     
     
@@ -58,7 +59,8 @@ public class VendingMachineDaoStubImpl implements VendingMachineDao{
     
     @Override
     public Item updateItem(String itemId, Item item) throws VendingMachineDaoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        onlyItem = item;
+        return onlyItem;
     }
 
     @Override
@@ -68,12 +70,24 @@ public class VendingMachineDaoStubImpl implements VendingMachineDao{
 
     @Override
     public BigDecimal getBalance() throws VendingMachineDaoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return currentMoney;
     }
 
     @Override
     public void updateBalance(BigDecimal newBalance) throws VendingMachineDaoException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setBalanceTest() {
+        currentMoney = new BigDecimal(10.00); 
+    }
+    
+    @Override
+    public BigDecimal getBalanceTest(){
+        System.out.println("test");
+        System.out.println(currentMoney);
+        return currentMoney;
     }
 
     

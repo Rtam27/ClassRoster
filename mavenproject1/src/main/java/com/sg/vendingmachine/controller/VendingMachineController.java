@@ -86,7 +86,7 @@ public class VendingMachineController {
         while (adding) {
             getCurrentBalance();
             int addingSelection = view.addCoinsOption();
-
+            
             switch (addingSelection) {
                 case 1:
                     service.addingPenny();
@@ -129,7 +129,7 @@ public class VendingMachineController {
     public void run() throws VendingMachineDaoException, VendingMachineInsufficientFundsException, VendingMachineOutofStockException {
 
         boolean running = true;
-
+        getAllItems();
         while (running) {
             int menuSelection = view.printMenuAndGetSelection();
             try {
@@ -141,7 +141,7 @@ public class VendingMachineController {
                         break;
                     case 2:
 //                AddItem();
-                        System.out.println("2");
+                        System.out.println("Will be added soon!");
 
                         break;
                     case 3:

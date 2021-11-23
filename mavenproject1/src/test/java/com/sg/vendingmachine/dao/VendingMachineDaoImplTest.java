@@ -5,31 +5,35 @@
 package com.sg.vendingmachine.dao;
 
 import com.sg.vendingmachine.dto.Item;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author raymondtam
  */
 public class VendingMachineDaoImplTest {
-    VendingMachineDao  testDao;
-
+        VendingMachineDao  testDao;
     public VendingMachineDaoImplTest() {
+        
     }
     
-
+    @BeforeClass
+    public static void setUpClass() {
+    }
     
-    @BeforeEach
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
     public void setUp() throws IOException {
         String testFile = "testitem.txt";
         // Use the FileWriter to quickly blank the file
@@ -37,10 +41,11 @@ public class VendingMachineDaoImplTest {
         testDao = new VendingMachineDaoImpl(testFile);
     }
     
-    @AfterEach
+    @After
     public void tearDown() {
     }
-    
+
+       
     @Test
     public void testAddGetItem() throws VendingMachineDaoException {
      
@@ -53,25 +58,23 @@ public class VendingMachineDaoImplTest {
     testDao.addItem("0003", firstItem);
     Item retrievedItem = testDao.getItem(itemId);
     
+
     
-        assertEquals(firstItem.getItemId(),
-                retrievedItem.getItemId(),
-                "Checking item id.");
+    assertEquals(firstItem.getItemId(),
+                retrievedItem.getItemId());
+    
     assertEquals(firstItem.getItemName(),
-                retrievedItem.getItemName(),
-                "Checking item name.");
-    assertEquals(firstItem.getItemCost(), 
-                retrievedItem.getItemCost(),
-                "Checking item cost.");
-    assertEquals(firstItem.getCurrentQuantity(), 
-                retrievedItem.getCurrentQuantity(),
-                "Checking item quantity.");
-      assertEquals(firstItem.getMaxQuantity(), 
-                retrievedItem.getMaxQuantity(),
-                "Checking item max quantity.");
+                retrievedItem.getItemName());
+    
+    assertEquals(firstItem.getCurrentQuantity(),
+                retrievedItem.getCurrentQuantity());
+    
+    assertEquals(firstItem.getMaxQuantity(),
+                retrievedItem.getMaxQuantity());
+
     }
     
-
+    
     @Test
     public void testAddGetAllItems() throws Exception {
 
@@ -93,21 +96,58 @@ public class VendingMachineDaoImplTest {
     testDao.addItem(secondItem.getItemId(), secondItem);
 
     List<Item> allItem = testDao.getAllItem();
+    
+    
+    System.out.println(allItem);
 
-    assertNotNull(allItem, "The list of students must not null");
-    assertEquals(2, allItem.size(),"List of items should have 2 item.");
+    assertNotNull(allItem);
+    assertEquals(2, allItem.size());
    
-   
+    
+  
 
 
     // Then the specifics
-    assertTrue(allItem.contains(firstItem),
-                "The list of item should include Mars.");
-    assertTrue(allItem.contains(secondItem),
-            "The list of items should include Rare.");
-
-}
+    assertTrue(allItem.contains(firstItem)
+               );
+    assertTrue(allItem.contains(secondItem)
+            );
 
 
     
+}
+    
+@Test
+  public void testupdateItems() throws Exception {
+  Item firstItem= new Item("0011");
+    firstItem.setItemName("Snickers");
+    firstItem.setItemCost(3.52);
+    firstItem.setCurrentQuantity(3);
+    firstItem.setMaxQuantity(4);
+    
+    testDao.addItem(firstItem.getItemId(), firstItem);
+    
+    Item secondItem= new Item("0011");
+    secondItem.setItemName("Food");
+    firstItem.setItemCost(4.00);
+    firstItem.setCurrentQuantity(10);
+    firstItem.setMaxQuantity(20);
+    
+    testDao.updateItem("0011",secondItem);
+    Item retrievedItem = testDao.getItem("0011");
+    
+    assertEquals(secondItem.getItemId(),
+                retrievedItem.getItemId());
+    
+    assertEquals(secondItem.getItemName(),
+                retrievedItem.getItemName());
+    
+    assertEquals(secondItem.getCurrentQuantity(),
+                retrievedItem.getCurrentQuantity());
+    
+    assertEquals(secondItem.getMaxQuantity(),
+                retrievedItem.getMaxQuantity());
+  }
+  
+
 }
