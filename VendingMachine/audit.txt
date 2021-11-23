@@ -1,0 +1,7 @@
+2021-11-20T16:14:40.349699 : Kit-Kat was purchased
+2021-11-21T16:45:05.774832 : Kit-Kat was purchased
+2021-11-21T16:46:00.028667 : Kit-Kat was purchased
+2021-11-21T16:47:12.696411 : Kit-Kat was purchased
+2021-11-21T16:48:02.183266 : Kit-Kat was purchased
+2021-11-21T16:48:41.325118 : Kit-Kat was purchased
+2021-11-22T18:47:46.413123 : Kit-Kat was purchased
